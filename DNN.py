@@ -4,6 +4,7 @@
 # 2개의 층
 #%%
 from tensorflow import keras
+from tensorflow.python.keras.optimizer_v2 import adagrad
 (train_input, train_target), (test_input, test_target) = keras.datasets.fashion_mnist.load_data()
 # 케라스 api를 사용해서 데이터셋 불러오기
 # %%
@@ -93,3 +94,50 @@ model.evaluate(val_scaled, val_target)
 # %%
 # 옵티마이저 
 # 머신러닝 학습 프로세스에서 실제로 파라미터를 갱신시키는 부분을 의미 
+# 케라스는 기본적으로 미니배치 경사 하강법을 사용하며 미니배치 개수는 32개이다
+
+model.compile(optimizer='sgd', loss='sparse_categorucal_crossentropy', metrics='accuaracy')
+
+# 이 옵티마이저는 tensorflow.keras.optimizers 패키지 아래 SGD클래스로 구현되어있다. 
+# 'sgd' 문자열은 이 클래스의 기본 설정 매개변수로 생성한 객체와 동일
+
+# %%
+sgd = keras.optimizers.SGD()
+model.compile(optimizer=sgd, loss='sparse_categorical_crossentropy', metrics='accuracy')
+
+# 원래 sgd= keras.optimizers.SGD()처럼 SGD클래스 객체를 만들어 사용해야 하는데 번거로움을 피하고자 'sgd'라고 지정하면 자동으로 SGD객체를 만들어줌
+# %%
+sgd = keras.optimizers.SGD(learning_rate=0.1)
+
+#기본 경사 하강법 옵티마이저는 모두 SGD클래스에서 제공 
+# 0보다 큰값으로 지정하면 마치 이전의 그레이디언트를 가속도처럼 사용하는 모멘텀 최적화를 사용
+# 다음처럼 SGD클래스의 nesterov 매개변수를 기본값 False에서 True로 바꾸면 네스테로프 모멘텀 최적화 또는 네스테로프 가속 경사를 사용
+
+# %%
+sgd = keras.optimizers.SGD(momentum=0.9, nesterov=True)
+# %%
+# 모델이 최적점에 가까이 갈수록 학습률을 낮출수 있다. 이렇게하면 안정적으로 최적점에 술며할 가능성이 높다 
+# 이러한 학습률을 적응적 학습률이라고한다
+adagrad = keras.optimizers.Adagrad()
+model.compile(optimizer=adagrad, loss='sparse_categorical_crossentropy', metrics='accuracy')
+# %%
+rmsprop = keras.optimizers.RMSprop()
+model.compile(optimizer=rmsprop, loss='sparse_categorical_crossentropy', metrics='accuracy')
+
+# %%
+# 모델 다시 생성
+model = keras.Sequential()
+model.add(keras.layers.Flatten(input_shape=(28,28)))
+model.add(keras.layers.Dense(100, activation='relu'))
+model.add(keras.layers.Dense(10, activation='softmax'))
+
+# %%
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics='accuracy')
+model.fit(train_scaled, train_target, epochs=5)
+# optimizer를 'adam'으로 설정하고 5번의 에[포크동안 훈련]
+# %%
+# 성능 테스트
+model.evaluate(val_scaled, val_target)
+# %%
+# 정리
+# 옵티마이저는 신경망의 가중치나 절편을 학습하기 위한 알고리즘 또는 방법을 말함
