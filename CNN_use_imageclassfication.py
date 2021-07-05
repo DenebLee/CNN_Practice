@@ -102,3 +102,4 @@ test_scaled = test_input.reshape(-1, 28, 28, 1) / 255.0
 model.evaluate(test_scaled, test_target)
 
 # 테스트 세트에서의 점수는 검증 세트보다 조금 더 작음
+# %%
