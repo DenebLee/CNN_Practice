@@ -60,7 +60,7 @@ plt.ylabel('loss')
 plt.show()
 # 에포크 횟수가 늘어나면 정확도는 늘게되며 손실이 줄어든다 확인! 
 # %%
-# 인공 신경망 모델이 최적화하는 대상은 정확도가 아니라 손실 함수다. 
+# 인공 신경망 모델이 최적화하는 대상은 정확도가 아니라 손실 함수다
 # 이따금 손실 감소에 비례하여 정확도가 높아지지 않는경우가 있다
 model = model_fn()
 model.compile(loss='sparse_categorical_crossentropy', metrics='accuracy')
@@ -68,7 +68,7 @@ history = model.fit(train_scaled, train_target, epochs=20, verbose=0, validation
 # %%
 print(history.history.keys())
 
-#검증 세트에 대한 손실은 val_loss에 들어있고 정확도는 val_accuracy에있다
+#검증 세트에 대한 손실은 val_loss에 들어있고 정확도는 val_accuracy에 있다
 
 # %%
 # 과대/과소적합 문제를 조사하기 위해 훈련 손실과 검증 손실을 한 그래프에 그려서 비교
@@ -130,7 +130,7 @@ history = model.fit(train_scaled, train_target, epochs=10, verbose=0, validation
 # %%
 model.save_weights('model-weights.h5')
 #해당 모델 저장 
-# HDF5 포램ㅅ으로 저장
+# HDF5 포맷으로 저장
 model.save('model-whole.h5')
 # 두가지 파일 생성확인필요 -----> 생성완료
 # %%
@@ -143,7 +143,7 @@ import numpy as np
 val_labels = np.argmax(model.predict(val_scaled), axis=-1)
 print(np.mean(val_labels == val_target))
 # %%
-# 모델 전체를 파일에서 일긍 ㄴ다음 검증 세트의 정확도 출력해보기
+# 모델 전체를 파일에서 읽은 다음 검증 세트의 정확도 출력해보기
 model = keras.models.load_model('model-whole.h5')
 model.evaluate(val_scaled, val_target)
 

@@ -134,7 +134,7 @@ model.add(keras.layers.Dense(10, activation='softmax'))
 # %%
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics='accuracy')
 model.fit(train_scaled, train_target, epochs=5)
-# optimizer를 'adam'으로 설정하고 5번의 에[포크동안 훈련]
+# optimizer를 'adam'으로 설정하고 5번의 에포크동안 훈련
 # %%
 # 성능 테스트
 model.evaluate(val_scaled, val_target)

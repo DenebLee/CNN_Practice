@@ -3,7 +3,6 @@
 # 만약 통계학적 모델의 집합이 다음과 같은 특징들을 가진다면 해당 집합을 신경(neural)이라고부른다
 # 1. 조정이 가능한 가중치들의 집합 즉 학습 알고리즘에 의해 조정이 가능한 숫자로 표현된 매개변수로 구성
 # 2. 입력의 비선형 함수를 유추가능
-# 내가좋아하는 텐서플로우 나옴 keras 까지
 #%%
 from tensorflow import keras
 (train_input, train_target), (test_input, test_target) = keras.datasets.fashion_mnist.load_data()
@@ -58,7 +57,7 @@ print(train_scaled.shape, train_target.shape)
 print(val_scaled.shape, val_target.shape)
 # %%
 # 케라스의 레이어 패키지 안에는 다양한 층이 준비되어있는데 가장 기본이 되는 층은 밀집층이다
-# 픽셀과 뉴런이 연결되어있는 층을 양쪽이 뉴런이 모두 연결하고 있기 떄문에 완전 연결층이라고 부른다
+# 픽셀과 뉴런이 연결되어있는 층을 양쪽이 뉴런이 모두 연결하고 있기 떄문에 완전 연결층 이라고 부른다
 
 dense = keras.layers.Dense(10, activation='softmax', input_shape=(784, ))
 # 10 = 뉴런개수 , activation = 뉴런의 출력에 적용할 함수 , input_shape= 입력의크기
@@ -66,7 +65,7 @@ dense = keras.layers.Dense(10, activation='softmax', input_shape=(784, ))
 # %%
 model = keras.Sequential(dense)
 # 절편의 경우는 아예 선도 그리지 않는 경우가 많다. 하지만 절편이 뉴런마다 더해진다는 것을 꼭 기억해야됨
-# 소프트맥스와 같이 뉴런의 선형 방정식 계산 결과에 적용되는 함수는 활서오하 함수라고 부른다
+# 소프트맥스와 같이 뉴런의 선형 방정식 계산 결과에 적용되는 함수는 활성화 함수라고 부른다
 
 # %%
 # 인공 신경망으로 패션 아이템 분류하기
