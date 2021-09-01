@@ -176,3 +176,4 @@ rnn_model = keras.models.load_model('best-2rnn-model.h5')
 rnn_model.evaluate(test_seq, test_target)
 
 # 이 모델은 드롭아웃을 적용하여 과대적합을 잘 억제했기 때문에 테스트 세트의 성능이 검증 세트와 크게 차이 나지않음
+# 모델 학습간 사용한 라이브러리는 따로 정리하여 정리파일을 작성하는게 훨씬 유리하며 추후 다시 복습할땐 라이브러리마다의 장점에 대해 기술할 예정 
